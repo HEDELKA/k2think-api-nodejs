@@ -212,6 +212,22 @@ node simple_test.js
 - **[USAGE.md](USAGE.md)** - HTTP API usage guide
 - **[QUICKSTART.md](QUICKSTART.md)** - Quick start guide (Russian)
 
+## Support
+
+If you find this project useful, consider supporting its development:
+
+**USDT (TON Network)**
+```
+UQABR7EgocAi1K4VH3Fg4FHyhmNLC9FPoYuED3YkBJZAFelt
+```
+
+**USDT (TRC20)**
+```
+TKSvGezbzvEz9XpKANUUZE89ej436eiqmd
+```
+
+See [SUPPORT.md](SUPPORT.md) for more ways to help.
+
 ## License
 
 MIT

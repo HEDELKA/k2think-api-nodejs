@@ -65,3 +65,17 @@ print(response.json()["choices"][0]["message"]["content"])
 ✅ **Сохранение контекста** - многоходовые диалоги работают  
 ✅ **OpenAI-совместимый** - можно использовать клиентские библиотеки OpenAI  
 ✅ **Автоматическое обновление токенов** - работает без перебоев
+
+## Поддержать проект
+
+Если проект оказался полезным, можете поддержать разработку:
+
+**USDT (TON Network)**
+```
+UQABR7EgocAi1K4VH3Fg4FHyhmNLC9FPoYuED3YkBJZAFelt
+```
+
+**USDT (TRC20)**
+```
+TKSvGezbzvEz9XpKANUUZE89ej436eiqmd
+```
