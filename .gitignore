@@ -1,0 +1,47 @@
+# Dependencies
+node_modules/
+
+# Environment variables (contains credentials!)
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+lerna-debug.log*
+
+# Test files with credentials
+test_real_request.js
+
+# HAR files (may contain sensitive data)
+*.har
+
+# Temp files
+/tmp/
+
+# OS
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Testing
+coverage/
+.nyc_output/
+
+# Production
+dist/
+build/
