@@ -1,7 +1,7 @@
 {
   "version": "1.0",
   "createdAt": "2026-02-19T00:00:00.000Z",
-  "updatedAt": "2026-02-19T06:12:33.001Z",
+  "updatedAt": "2026-02-19T06:26:38.361Z",
   "accounts": [
     {
       "id": "acc_1771481122615_nvp81wsqo",
@@ -12,11 +12,11 @@
       "createdAt": "2026-02-19T06:05:22.617Z",
       "lastUsed": null,
       "stats": {
-        "totalRequests": 2,
-        "successfulRequests": 2,
+        "totalRequests": 4,
+        "successfulRequests": 4,
         "failedRequests": 0,
         "rateLimitHits": 0,
-        "lastRequestAt": "2026-02-19T06:06:44.236Z"
+        "lastRequestAt": "2026-02-19T06:26:35.867Z"
       },
       "rateLimit": {
         "requestsThisMinute": 0,
@@ -38,11 +38,11 @@
       "createdAt": "2026-02-19T06:05:22.621Z",
       "lastUsed": null,
       "stats": {
-        "totalRequests": 2,
-        "successfulRequests": 2,
+        "totalRequests": 4,
+        "successfulRequests": 4,
         "failedRequests": 0,
         "rateLimitHits": 0,
-        "lastRequestAt": "2026-02-19T06:06:46.676Z"
+        "lastRequestAt": "2026-02-19T06:26:38.359Z"
       },
       "rateLimit": {
         "requestsThisMinute": 0,
@@ -64,11 +64,11 @@
       "createdAt": "2026-02-19T06:05:22.623Z",
       "lastUsed": null,
       "stats": {
-        "totalRequests": 2,
-        "successfulRequests": 2,
+        "totalRequests": 3,
+        "successfulRequests": 3,
         "failedRequests": 0,
         "rateLimitHits": 0,
-        "lastRequestAt": "2026-02-19T06:06:49.440Z"
+        "lastRequestAt": "2026-02-19T06:26:29.733Z"
       },
       "rateLimit": {
         "requestsThisMinute": 0,
@@ -90,11 +90,11 @@
       "createdAt": "2026-02-19T06:05:22.625Z",
       "lastUsed": null,
       "stats": {
-        "totalRequests": 1,
-        "successfulRequests": 1,
+        "totalRequests": 2,
+        "successfulRequests": 2,
         "failedRequests": 0,
         "rateLimitHits": 0,
-        "lastRequestAt": "2026-02-19T06:06:41.745Z"
+        "lastRequestAt": "2026-02-19T06:26:32.258Z"
       },
       "rateLimit": {
         "requestsThisMinute": 0,
@@ -118,7 +118,7 @@
       "stats": {
         "totalRequests": 0,
         "successfulRequests": 0,
-        "failedRequests": 0,
+        "failedRequests": 1,
         "rateLimitHits": 0,
         "lastRequestAt": null
       },
