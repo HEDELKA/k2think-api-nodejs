@@ -31,11 +31,11 @@ app.use(express.urlencoded({ extended: true }));
 app.post('/v1/chat/completions', async (req, res) => {
   try {
     const { model, messages, temperature = 1, max_tokens, stream = false } = req.body;
-    
+
     // Prepare payload for K2Think API (uses /api/chat/completions not /api/v1/chat/completions)
     const k2thinkPayload = {
       stream: stream,
-      model: model || 'MBZUAI-IFM/K2-Think',
+      model: model || 'MBZUAI-IFM/K2-Think-v2',  // Default to v2 model
       messages: messages,
       ...(temperature !== undefined && { temperature: temperature }),
       ...(max_tokens && { max_tokens: max_tokens })
@@ -71,27 +71,29 @@ app.post('/v1/chat/completions', async (req, res) => {
 app.get('/v1/models', async (req, res) => {
   try {
     const response = await authManager.makeAuthenticatedRequest(
-      `${process.env.K2THINK_API_BASE || 'https://www.k2think.ai'}/api/v1/models`,
+      `${process.env.K2THINK_API_BASE || 'https://www.k2think.ai'}/api/models`,  // Use /api/models (not /api/v1/models)
       'GET',
       null,
       {
         'Accept': 'application/json'
       }
     );
-    
+
     // K2Think returns array of models, transform to OpenAI format
     const models = Array.isArray(response.data) ? response.data : (response.data.data || []);
-    
+
     const openAIModels = {
       object: 'list',
       data: models.map(model => ({
-        id: model.id || model.name,
+        id: model.id,
         object: 'model',
         created: Math.floor(Date.now() / 1000),
-        owned_by: model.owned_by || 'k2think'
+        owned_by: model.owned_by || 'k2think',
+        name: model.name,
+        status: model.status
       }))
     };
-    
+
     res.status(200).json(openAIModels);
   } catch (error) {
     console.error('Models error:', error.response?.data || error.message);

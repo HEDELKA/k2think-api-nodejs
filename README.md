@@ -11,7 +11,7 @@ const K2ThinkClient = require('k2think-api-nodejs');
 const client = new K2ThinkClient();
 
 const response = await client.chat.completions.create({
-  model: 'MBZUAI-IFM/K2-Think',
+  model: 'MBZUAI-IFM/K2-Think-v2',  // Use v2 model
   messages: [{ role: 'user', content: 'Hello!' }]
 });
 ```
@@ -22,7 +22,7 @@ const response = await client.chat.completions.create({
 npm start
 curl -X POST http://localhost:3000/v1/chat/completions \
   -H "Content-Type: application/json" \
-  -d '{"model":"MBZUAI-IFM/K2-Think","messages":[{"role":"user","content":"Hello"}]}'
+  -d '{"model":"MBZUAI-IFM/K2-Think-v2","messages":[{"role":"user","content":"Hello"}]}'
 ```
 
 ## Features
@@ -60,7 +60,7 @@ const client = new K2ThinkClient();
 // Simple question
 async function ask(question) {
   const response = await client.chat.completions.create({
-    model: 'MBZUAI-IFM/K2-Think',
+    model: 'MBZUAI-IFM/K2-Think-v2',  // Updated model name
     messages: [{ role: 'user', content: question }]
   });
   return response.choices[0].message.content;
@@ -90,7 +90,7 @@ npm start
 curl -X POST http://localhost:3000/v1/chat/completions \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "MBZUAI-IFM/K2-Think",
+    "model": "MBZUAI-IFM/K2-Think-v2",
     "messages": [
       {"role": "user", "content": "Hello! What is 2+2?"}
     ]
@@ -103,7 +103,7 @@ curl -X POST http://localhost:3000/v1/chat/completions \
 curl -X POST http://localhost:3000/v1/chat/completions \
   -H "Content-Type: application/json" \
   -d '{
-    "model": "MBZUAI-IFM/K2-Think",
+    "model": "MBZUAI-IFM/K2-Think-v2",
     "messages": [
       {"role": "user", "content": "My name is Alice"},
       {"role": "assistant", "content": "Nice to meet you, Alice!"},
@@ -187,14 +187,30 @@ Standard OpenAI-compatible format:
 Run the test suite:
 
 ```bash
-node simple_test.js
+# Test library mode
+node test_library.js
+
+# Test library with integration tests
+node tests/library_integration.test.js
+
+# Test API proxy mode (start server first)
+npm start &
+node tests/api_integration.test.js
 ```
+
+See [docs/TEST_RESULTS.md](docs/TEST_RESULTS.md) for detailed test results.
 
 ## Troubleshooting
 
 - **Authentication errors**: Check credentials in `.env`
+- **Model not found**: Use `MBZUAI-IFM/K2-Think-v2` (not `MBZUAI-IFM/K2-Think`)
 - **Port already in use**: Change `PORT` in `.env` or stop other service on port 3000
 - **No response**: Check K2Think service availability and internet connection
+- **Proxy errors**: The library bypasses system proxy automatically
+
+## Available Models
+
+- **MBZUAI-IFM/K2-Think-v2** - Latest K2 Think model with enhanced reasoning
 
 ## Files
 
@@ -202,8 +218,9 @@ node simple_test.js
 - `index.js` - **API proxy mode** - HTTP server with endpoints
 - `auth_manager.js` - Authentication and token management
 - `examples/` - Usage examples for library mode
+- `tests/` - Integration tests for library and API modes
 - `test_library.js` - Test for library mode
-- `simple_test.js` - Test for API proxy mode
+- `docs/TEST_RESULTS.md` - Detailed test results and troubleshooting
 - `.env` - Configuration (create from `.env.example`)
 
 ## Documentation

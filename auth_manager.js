@@ -1,4 +1,16 @@
 const axios = require('axios');
+const https = require('https');
+
+// HTTPS agent to bypass proxy issues with Cloudflare
+const httpsAgent = new https.Agent({
+  rejectUnauthorized: true
+});
+
+// Create axios instance with HTTPS agent (bypasses system proxy)
+const axiosInstance = axios.create({
+  httpsAgent,
+  proxy: false
+});
 
 class AuthManager {
   constructor(apiBase) {
@@ -8,30 +20,24 @@ class AuthManager {
     this.authCredentials = null;
   }
 
-  // Method to store credentials for automatic re-authentication
-  setCredentials(email, password) {
-    this.authCredentials = { email, password };
-  }
-
   // Method to authenticate and get token
   async authenticate(email, password) {
     try {
-      const response = await axios.post(
+      const response = await axiosInstance.post(
         `${this.apiBase}/api/v1/auths/signin`,
         { email, password },
         {
           headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json'
-          },
-          proxy: false  // Disable proxy to avoid HTTP/HTTPS issues
+          }
         }
       );
 
       // Assuming the response contains the token
       // Adjust based on actual API response structure
       this.authToken = response.data.token || response.data.access_token || response.data.data?.token;
-      
+
       // Calculate expiration time (assuming standard JWT expiration)
       // If we know the expiration from response, use it; otherwise assume 1 hour
       if (response.data.expires_in) {
@@ -40,12 +46,17 @@ class AuthManager {
         // 59 minutes default expiration
         this.tokenExpiration = new Date(Date.now() + (59 * 60 * 1000));
       }
-      
+
       return response.data;
     } catch (error) {
       console.error('Authentication failed:', error.response?.data || error.message);
       throw new Error(error.response?.data?.detail || error.message || 'Authentication failed');
     }
+  }
+
+  // Method to store credentials for automatic re-authentication
+  setCredentials(email, password) {
+    this.authCredentials = { email, password };
   }
 
   // Method to get a valid token (refresh if needed)
@@ -75,8 +86,7 @@ class AuthManager {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
         ...headers
-      },
-      proxy: false  // Disable proxy to avoid HTTP/HTTPS issues
+      }
     };
 
     // Add data for methods that support it
@@ -85,29 +95,29 @@ class AuthManager {
     }
 
     try {
-      const response = await axios(config);
+      const response = await axiosInstance(config);
       return response;
     } catch (error) {
       // Check if the error is due to authentication (401 or 403)
       if (error.response && (error.response.status === 401 || error.response.status === 403)) {
         console.log('Authentication failed, re-authenticating and retrying request...');
-        
+
         // Clear the invalid token
         this.authToken = null;
         this.tokenExpiration = null;
-        
+
         // Re-authenticate to get a new token
         await this.authenticate(this.authCredentials.email, this.authCredentials.password);
-        
+
         // Get the new token
         const newToken = await this.getValidToken();
-        
+
         // Retry the request with the new token
         config.headers.Authorization = `Bearer ${newToken}`;
-        const retryResponse = await axios(config);
+        const retryResponse = await axiosInstance(config);
         return retryResponse;
       }
-      
+
       // Re-throw other errors
       throw error;
     }

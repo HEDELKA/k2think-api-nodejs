@@ -1,4 +1,16 @@
 const axios = require('axios');
+const https = require('https');
+
+// HTTPS agent to bypass proxy issues with Cloudflare
+const httpsAgent = new https.Agent({
+  rejectUnauthorized: true
+});
+
+// Create axios instance with HTTPS agent (bypasses system proxy)
+const axiosInstance = axios.create({
+  httpsAgent,
+  proxy: false
+});
 
 /**
  * K2Think AI Client - Use K2Think like OpenAI SDK
@@ -9,40 +21,42 @@ class K2ThinkClient {
     this.email = options.email || process.env.K2THINK_EMAIL;
     this.password = options.password || process.env.K2THINK_PASSWORD;
     this.apiBase = options.apiBase || process.env.K2THINK_API_BASE || 'https://www.k2think.ai';
-    
+
     this.authToken = null;
     this.tokenExpiration = null;
-    
+
     if (!this.email || !this.password) {
       throw new Error('K2Think credentials required. Pass {email, password} or set K2THINK_EMAIL and K2THINK_PASSWORD environment variables.');
     }
-    
+
+    // Default model - use v2 as per K2Think API
+    this.defaultModel = options.model || 'MBZUAI-IFM/K2-Think-v2';
+
     // OpenAI-style API structure
     this.chat = {
       completions: {
         create: this._createChatCompletion.bind(this)
       }
     };
-    
+
     this.models = {
       list: this._listModels.bind(this)
     };
   }
-  
+
   /**
    * Authenticate with K2Think API
    */
   async _authenticate() {
     try {
-      const response = await axios.post(
+      const response = await axiosInstance.post(
         `${this.apiBase}/api/v1/auths/signin`,
         { email: this.email, password: this.password },
         {
           headers: {
             'Content-Type': 'application/json',
             'Accept': 'application/json'
-          },
-          proxy: false
+          }
         }
       );
       
@@ -75,7 +89,7 @@ class K2ThinkClient {
    */
   async _makeRequest(url, method, data = null) {
     const token = await this._getValidToken();
-    
+
     const config = {
       method,
       url,
@@ -83,30 +97,29 @@ class K2ThinkClient {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
         'Accept': 'application/json'
-      },
-      proxy: false
+      }
     };
-    
+
     if (data && ['POST', 'PUT', 'PATCH'].includes(method.toUpperCase())) {
       config.data = data;
     }
-    
+
     try {
-      const response = await axios(config);
+      const response = await axiosInstance(config);
       return response.data;
     } catch (error) {
       // Retry once on auth failure
       if (error.response && (error.response.status === 401 || error.response.status === 403)) {
         this.authToken = null;
         this.tokenExpiration = null;
-        
+
         const newToken = await this._getValidToken();
         config.headers.Authorization = `Bearer ${newToken}`;
-        
-        const retryResponse = await axios(config);
+
+        const retryResponse = await axiosInstance(config);
         return retryResponse.data;
       }
-      
+
       throw error;
     }
   }
@@ -114,25 +127,25 @@ class K2ThinkClient {
   /**
    * Create chat completion (OpenAI compatible)
    * @param {Object} options - Chat completion options
-   * @param {string} options.model - Model to use (default: MBZUAI-IFM/K2-Think)
+   * @param {string} options.model - Model to use (default: MBZUAI-IFM/K2-Think-v2)
    * @param {Array} options.messages - Array of message objects
    * @param {number} options.temperature - Temperature (0-2)
    * @param {number} options.max_tokens - Max tokens to generate
    * @param {boolean} options.stream - Stream response (not yet supported)
    */
   async _createChatCompletion(options) {
-    const { 
-      model = 'MBZUAI-IFM/K2-Think', 
-      messages, 
-      temperature, 
-      max_tokens, 
-      stream = false 
+    const {
+      model = this.defaultModel,
+      messages,
+      temperature,
+      max_tokens,
+      stream = false
     } = options;
-    
+
     if (!messages || !Array.isArray(messages) || messages.length === 0) {
       throw new Error('messages array is required');
     }
-    
+
     const payload = {
       stream,
       model,
@@ -140,7 +153,7 @@ class K2ThinkClient {
       ...(temperature !== undefined && { temperature }),
       ...(max_tokens && { max_tokens })
     };
-    
+
     return await this._makeRequest(
       `${this.apiBase}/api/chat/completions`,
       'POST',
@@ -152,20 +165,24 @@ class K2ThinkClient {
    * List available models (OpenAI compatible)
    */
   async _listModels() {
+    // Use /api/models endpoint (not /api/v1/models)
     const response = await this._makeRequest(
-      `${this.apiBase}/api/v1/models`,
+      `${this.apiBase}/api/models`,
       'GET'
     );
-    
-    const models = Array.isArray(response) ? response : (response.data || []);
-    
+
+    // Handle response format from K2Think API
+    const modelsData = response.data || (Array.isArray(response) ? response : []);
+
     return {
       object: 'list',
-      data: models.map(model => ({
-        id: model.id || model.name,
+      data: modelsData.map(model => ({
+        id: model.id,
         object: 'model',
         created: Math.floor(Date.now() / 1000),
-        owned_by: model.owned_by || 'k2think'
+        owned_by: model.owned_by || 'k2think',
+        name: model.name,
+        status: model.status
       }))
     };
   }

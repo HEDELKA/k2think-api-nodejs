@@ -13,18 +13,18 @@ async function testLibrary() {
     // Test simple chat
     console.log('2. Testing simple chat...');
     const response1 = await client.chat.completions.create({
-      model: 'MBZUAI-IFM/K2-Think',
+      model: 'MBZUAI-IFM/K2-Think-v2',  // Use v2 model
       messages: [
         { role: 'user', content: 'Say just "Hello"' }
       ]
     });
     console.log('✓ Response received');
     console.log('   Answer:', response1.choices[0].message.content.substring(0, 80) + '...\n');
-    
+
     // Test context preservation
     console.log('3. Testing context preservation...');
     const response2 = await client.chat.completions.create({
-      model: 'MBZUAI-IFM/K2-Think',
+      model: 'MBZUAI-IFM/K2-Think-v2',  // Use v2 model
       messages: [
         { role: 'user', content: 'My name is Bob' },
         { role: 'assistant', content: 'Nice to meet you, Bob!' },
