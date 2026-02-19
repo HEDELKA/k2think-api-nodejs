@@ -1,7 +1,7 @@
 {
   "version": "1.0",
   "createdAt": "2026-02-19T00:00:00.000Z",
-  "updatedAt": "2026-02-19T06:06:49.441Z",
+  "updatedAt": "2026-02-19T06:12:33.001Z",
   "accounts": [
     {
       "id": "acc_1771481122615_nvp81wsqo",
@@ -104,6 +104,32 @@
       "priority": 1,
       "metadata": {
         "name": "Giuseppa Account",
+        "tags": []
+      }
+    },
+    {
+      "id": "acc_1771481553000_5fm7x5eld",
+      "email": "loterbauercharlie@gmail.com",
+      "password": "XpXHUd6cUhd4Z+lzjiXA8w==:q39cogVjuzVONHRVqWK53Q==:s/VQ5OT2hyZoc48arNybHA==",
+      "encryptionMethod": "aes-256-gcm",
+      "status": "active",
+      "createdAt": "2026-02-19T06:12:33.001Z",
+      "lastUsed": null,
+      "stats": {
+        "totalRequests": 0,
+        "successfulRequests": 0,
+        "failedRequests": 0,
+        "rateLimitHits": 0,
+        "lastRequestAt": null
+      },
+      "rateLimit": {
+        "requestsThisMinute": 0,
+        "windowStart": "2026-02-19T06:12:33.001Z",
+        "blockedUntil": null
+      },
+      "priority": 1,
+      "metadata": {
+        "name": "Loterbauer Account",
         "tags": []
       }
     }

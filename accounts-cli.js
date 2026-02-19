@@ -22,63 +22,27 @@ function prompt(question) {
   });
 }
 
-// Hide password input
-function promptPassword(question) {
-  return new Promise(resolve => {
-    process.stdin.write(question);
-    process.stdin.setRawMode(true);
-    process.stdin.resume();
-    let password = '';
-
-    process.stdin.on('data', key => {
-      // Ctrl+C
-      if (key[0] === 3) {
-        process.exit();
-      }
-      // Enter
-      if (key[0] === 13) {
-        process.stdin.setRawMode(false);
-        process.stdin.pause();
-        process.stdin.removeAllListeners('data');
-        console.log();
-        resolve(password);
-        return;
-      }
-      // Backspace
-      if (key[0] === 127 || (key[0] === 8 && key[1] === 0)) {
-        if (password.length > 0) {
-          password = password.slice(0, -1);
-          process.stdout.write('\b \b');
-        }
-        return;
-      }
-      password += key;
-      process.stdout.write('*');
-    });
-  });
-}
-
 // Commands
 const commands = {
   async add(args) {
     console.log('\n=== Add New Account ===\n');
-    
+
     const email = await prompt('Email: ');
-    const password = await promptPassword('Password: ');
+    const password = await prompt('Password: ');
     const name = await prompt('Name (optional, press Enter to skip): ');
     const priorityStr = await prompt('Priority (1-10, default 1): ');
-    
+
     const priority = parseInt(priorityStr) || 1;
-    
+
     try {
       const account = await manager.addAccount({
         email,
         password,
         name: name || email,
         priority,
-        validate: true
+        validate: false  // Don't validate during CLI add (network issues)
       });
-      
+
       console.log('\n✅ Account added successfully!');
       console.log(`ID: ${account.id}`);
       console.log(`Email: ${account.email}`);
