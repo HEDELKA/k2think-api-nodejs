@@ -1,5 +1,5 @@
 require('dotenv').config();
-const K2ThinkClient = require('../client');
+const K2ThinkClient = require('../src/client');
 
 async function listModels() {
   console.log('=== K2Think Available Models ===\n');

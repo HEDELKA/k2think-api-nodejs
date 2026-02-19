@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
 const readline = require('readline');
-const AccountManager = require('./lib/account_manager');
-const AccountRotator = require('./lib/account_rotator');
+const AccountManager = require('../src/lib/account_manager');
+const AccountRotator = require('../src/lib/account_rotator');
 
 const manager = new AccountManager();
 const rotator = new AccountRotator({ manager });

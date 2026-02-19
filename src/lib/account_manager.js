@@ -3,8 +3,8 @@ const path = require('path');
 const crypto = require('crypto');
 const axios = require('axios');
 
-const DATA_FILE = path.join(__dirname, '..', 'data', 'accounts.json');
-const ENCRYPTION_KEY_FILE = path.join(__dirname, '..', 'data', '.encryption_key');
+const DATA_FILE = path.join(__dirname, '../../data/accounts.json');
+const ENCRYPTION_KEY_FILE = path.join(__dirname, '../../data/.encryption_key');
 
 /**
  * Account Manager - CRUD operations for K2Think accounts

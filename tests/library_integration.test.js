@@ -1,4 +1,4 @@
-const K2ThinkClient = require('../client');
+const K2ThinkClient = require('../src/client');
 
 /**
  * Integration tests for K2ThinkClient library

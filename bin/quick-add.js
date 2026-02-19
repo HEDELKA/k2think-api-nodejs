@@ -5,7 +5,7 @@
  * Usage: node quick-add.js email password [name]
  */
 
-const AccountManager = require('./lib/account_manager');
+const AccountManager = require('../src/lib/account_manager');
 
 async function main() {
   const [,, email, password, name] = process.argv;

@@ -2,11 +2,18 @@
   "name": "k2think-api-nodejs",
   "version": "1.0.0",
   "description": "K2Think AI Client - OpenAI-compatible library and API proxy for K2Think platform",
-  "main": "client.js",
+  "main": "src/client.js",
+  "bin": {
+    "k2think-accounts": "./bin/accounts-cli.js",
+    "k2think-add": "./bin/quick-add.js"
+  },
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js",
-    "test": "node simple_test.js",
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "test": "node tests/simple_test.js",
+    "test:library": "node tests/test_library.js",
+    "test:integration": "node tests/library_integration.test.js",
+    "test:multi": "node tests/test_multi_account.js",
     "example": "node examples/simple_chat.js"
   },
   "keywords": [

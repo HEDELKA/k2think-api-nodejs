@@ -2,7 +2,7 @@
  * Test multi-account client with real API requests
  */
 
-const K2ThinkMultiClient = require('../client_multi');
+const K2ThinkMultiClient = require('../src/client_multi');
 
 async function main() {
   console.log('=== Testing Multi-Account Client ===\n');
