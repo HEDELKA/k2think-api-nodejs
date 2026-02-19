@@ -1,8 +1,113 @@
 {
   "version": "1.0",
   "createdAt": "2026-02-19T00:00:00.000Z",
-  "updatedAt": "2026-02-19T00:00:00.000Z",
-  "accounts": [],
+  "updatedAt": "2026-02-19T06:06:49.441Z",
+  "accounts": [
+    {
+      "id": "acc_1771481122615_nvp81wsqo",
+      "email": "dagmar74@comfythings.com",
+      "password": "Yw0X01aVg//pxCMgqiDqUQ==:M78j552dvNNNY2Zs+F+j:9csO0erdJlTxE+9RW5jJlA==",
+      "encryptionMethod": "aes-256-gcm",
+      "status": "active",
+      "createdAt": "2026-02-19T06:05:22.617Z",
+      "lastUsed": null,
+      "stats": {
+        "totalRequests": 2,
+        "successfulRequests": 2,
+        "failedRequests": 0,
+        "rateLimitHits": 0,
+        "lastRequestAt": "2026-02-19T06:06:44.236Z"
+      },
+      "rateLimit": {
+        "requestsThisMinute": 0,
+        "windowStart": "2026-02-19T06:05:22.618Z",
+        "blockedUntil": null
+      },
+      "priority": 1,
+      "metadata": {
+        "name": "Dagmar Account",
+        "tags": []
+      }
+    },
+    {
+      "id": "acc_1771481122621_utn71x608",
+      "email": "hannahsapphire@2200freefonts.com",
+      "password": "RglzkerN9Z4CjkoyfU5dYg==:TK6GzRNh1zfAkTFEjLz5:KuRDZa1MftfkPikwVO0N6g==",
+      "encryptionMethod": "aes-256-gcm",
+      "status": "active",
+      "createdAt": "2026-02-19T06:05:22.621Z",
+      "lastUsed": null,
+      "stats": {
+        "totalRequests": 2,
+        "successfulRequests": 2,
+        "failedRequests": 0,
+        "rateLimitHits": 0,
+        "lastRequestAt": "2026-02-19T06:06:46.676Z"
+      },
+      "rateLimit": {
+        "requestsThisMinute": 0,
+        "windowStart": "2026-02-19T06:05:22.622Z",
+        "blockedUntil": null
+      },
+      "priority": 1,
+      "metadata": {
+        "name": "Hannah Account",
+        "tags": []
+      }
+    },
+    {
+      "id": "acc_1771481122623_unz1fvqhd",
+      "email": "satucostanzo5542016@gmail.com",
+      "password": "JV8z1N+qjc6Juxd4P4c8KQ==:wR1dGNv30Qe9Qfr19iCK:0cPUytuNoQACiNjmu0K75A==",
+      "encryptionMethod": "aes-256-gcm",
+      "status": "active",
+      "createdAt": "2026-02-19T06:05:22.623Z",
+      "lastUsed": null,
+      "stats": {
+        "totalRequests": 2,
+        "successfulRequests": 2,
+        "failedRequests": 0,
+        "rateLimitHits": 0,
+        "lastRequestAt": "2026-02-19T06:06:49.440Z"
+      },
+      "rateLimit": {
+        "requestsThisMinute": 0,
+        "windowStart": "2026-02-19T06:05:22.623Z",
+        "blockedUntil": null
+      },
+      "priority": 1,
+      "metadata": {
+        "name": "Satu Account",
+        "tags": []
+      }
+    },
+    {
+      "id": "acc_1771481122624_4xk4rq1lp",
+      "email": "giuseppahylton0701946@gmail.com",
+      "password": "RvlzQCDBOBoyUK0XAj5JYg==:asNMll75SUUO3axAqCEV:BP5GZ/7SvlG2KpgKjlqy3w==",
+      "encryptionMethod": "aes-256-gcm",
+      "status": "active",
+      "createdAt": "2026-02-19T06:05:22.625Z",
+      "lastUsed": null,
+      "stats": {
+        "totalRequests": 1,
+        "successfulRequests": 1,
+        "failedRequests": 0,
+        "rateLimitHits": 0,
+        "lastRequestAt": "2026-02-19T06:06:41.745Z"
+      },
+      "rateLimit": {
+        "requestsThisMinute": 0,
+        "windowStart": "2026-02-19T06:05:22.625Z",
+        "blockedUntil": null
+      },
+      "priority": 1,
+      "metadata": {
+        "name": "Giuseppa Account",
+        "tags": []
+      }
+    }
+  ],
   "settings": {
     "rotationStrategy": "round-robin",
     "rateLimitPerAccount": 10,
