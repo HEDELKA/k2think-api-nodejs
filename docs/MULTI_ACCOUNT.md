@@ -2,6 +2,18 @@
 
 Automatic account rotation for K2Think API to avoid rate limits and increase throughput.
 
+## Prerequisites
+
+### Get K2Think Accounts
+
+You need at least one K2Think account:
+
+1. **Sign up**: https://www.k2think.ai/auth?mode=signup
+2. **Login**: https://www.k2think.ai/auth
+3. Save email and password for each account you want to use
+
+**Recommended:** Create 3-5 accounts for better rotation and rate limit avoidance.
+
 ## Quick Start
 
 ### 1. Add Accounts

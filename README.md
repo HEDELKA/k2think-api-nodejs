@@ -60,14 +60,30 @@ See [docs/MULTI_ACCOUNT.md](docs/MULTI_ACCOUNT.md) for full guide.
 npm install
 ```
 
-## Quick Start - Library Mode
+## Prerequisites
 
-### 1. Configure credentials
+### Get K2Think Account
+
+Before using this library, you need a K2Think account:
+
+1. **Sign up**: https://www.k2think.ai/auth?mode=signup
+2. **Login**: https://www.k2think.ai/auth
+3. Save your email and password for configuration
+
+### Configure Credentials
+
+Create `.env` file from `.env.example`:
+
+```bash
+cp .env.example .env
+```
+
+Edit `.env` with your K2Think credentials:
 
 ```env
-# .env file
 K2THINK_EMAIL=your-email@example.com
 K2THINK_PASSWORD=your-password
+PORT=3000
 ```
 
 ### 2. Use in your code
