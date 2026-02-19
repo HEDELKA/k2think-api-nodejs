@@ -1,0 +1,14 @@
+{
+  "version": "1.0",
+  "createdAt": "2026-02-19T00:00:00.000Z",
+  "updatedAt": "2026-02-19T00:00:00.000Z",
+  "accounts": [],
+  "settings": {
+    "rotationStrategy": "round-robin",
+    "rateLimitPerAccount": 10,
+    "rateLimitWindowMs": 60000,
+    "cooldownMs": 30000,
+    "maxRetries": 3,
+    "autoValidateOnAdd": true
+  }
+}

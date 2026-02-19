@@ -25,6 +25,26 @@ curl -X POST http://localhost:3000/v1/chat/completions \
   -d '{"model":"MBZUAI-IFM/K2-Think-v2","messages":[{"role":"user","content":"Hello"}]}'
 ```
 
+### 3️⃣ Multi-Account Mode (NEW!)
+
+Automatic account rotation to avoid rate limits:
+
+```javascript
+const K2ThinkMultiClient = require('./client_multi');
+const client = new K2ThinkMultiClient();
+
+// Add accounts via CLI: node accounts-cli.js add
+
+// Rotation happens automatically!
+const response = await client.chat.completions.create({
+  model: 'MBZUAI-IFM/K2-Think-v2',
+  messages: [{ role: 'user', content: 'Hello!' }]
+});
+console.log(`Used account: ${response._accountId}`);
+```
+
+See [docs/MULTI_ACCOUNT.md](docs/MULTI_ACCOUNT.md) for full guide.
+
 ## Features
 
 - **Zero-configuration**: Set credentials once in `.env`
@@ -32,6 +52,7 @@ curl -X POST http://localhost:3000/v1/chat/completions \
 - **Automatic authentication**: Token management handled automatically
 - **Context preservation**: Multi-turn conversations work perfectly
 - **Two usage modes**: Library or HTTP API
+- **Multi-account support**: Automatic rotation to avoid rate limits (NEW!)
 
 ## Installation
 
@@ -215,12 +236,18 @@ See [docs/TEST_RESULTS.md](docs/TEST_RESULTS.md) for detailed test results.
 ## Files
 
 - `client.js` - **Library mode** - K2ThinkClient class for direct use
+- `client_multi.js` - **Multi-account mode** - Automatic account rotation
 - `index.js` - **API proxy mode** - HTTP server with endpoints
 - `auth_manager.js` - Authentication and token management
-- `examples/` - Usage examples for library mode
+- `accounts-cli.js` - CLI utility for managing multiple accounts
+- `lib/account_manager.js` - Account storage and management
+- `lib/account_rotator.js` - Account rotation logic
+- `examples/` - Usage examples for library and multi-account modes
 - `tests/` - Integration tests for library and API modes
 - `test_library.js` - Test for library mode
+- `data/accounts.json` - Multi-account storage (encrypted)
 - `docs/TEST_RESULTS.md` - Detailed test results and troubleshooting
+- `docs/MULTI_ACCOUNT.md` - Multi-account system guide
 - `.env` - Configuration (create from `.env.example`)
 
 ## Documentation
@@ -228,6 +255,8 @@ See [docs/TEST_RESULTS.md](docs/TEST_RESULTS.md) for detailed test results.
 - **[LIBRARY.md](LIBRARY.md)** - Complete library documentation with examples
 - **[USAGE.md](USAGE.md)** - HTTP API usage guide
 - **[QUICKSTART.md](QUICKSTART.md)** - Quick start guide (Russian)
+- **[MULTI_ACCOUNT.md](docs/MULTI_ACCOUNT.md)** - Multi-account system guide (NEW!)
+- **[ACCOUNT_SCHEMA.md](docs/ACCOUNT_SCHEMA.md)** - JSON storage schema
 
 ## Support
 
