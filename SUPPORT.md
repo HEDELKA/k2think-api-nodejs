@@ -4,14 +4,29 @@ If you find this project useful, consider supporting its development!
 
 ## Cryptocurrency Donations
 
-### USDT (TON Network)
+### 🪙 USDT (BNB Smart Chain)
 ```
-UQABR7EgocAi1K4VH3Fg4FHyhmNLC9FPoYuED3YkBJZAFelt
+0x30C93CEB10c53db8B01ae311db83C2287C431ECd
 ```
 
-### USDT (TRC20)
+### 🪙 USDT (TON Network)
 ```
-TKSvGezbzvEz9XpKANUUZE89ej436eiqmd
+UQDUm3wVVrkcdHgqAZnEIXRbtPwt9KV52M20C6vsMiheKmKV
+```
+
+### 🪙 USDT (Tron / TRC20)
+```
+TJLpsWFGkr26hbpRdHxHwMMzNjUECWKSQc
+```
+
+### 🪙 USDT (Ethereum)
+```
+0x80dCc2DA8ad2A8283F63AAaD94dD490373a48885
+```
+
+### 🪙 TON (TON Network)
+```
+UQDUm3wVVrkcdHgqAZnEIXRbtPwt9KV52M20C6vsMiheKmKV
 ```
 
 ## Why Support?
