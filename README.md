@@ -240,6 +240,7 @@ See [docs/TEST_RESULTS.md](docs/TEST_RESULTS.md) for detailed test results.
 - `index.js` - **API proxy mode** - HTTP server with endpoints
 - `auth_manager.js` - Authentication and token management
 - `accounts-cli.js` - CLI utility for managing multiple accounts
+- `quick-add.js` - Quick account addition script (recommended)
 - `lib/account_manager.js` - Account storage and management
 - `lib/account_rotator.js` - Account rotation logic
 - `examples/` - Usage examples for library and multi-account modes
@@ -255,8 +256,27 @@ See [docs/TEST_RESULTS.md](docs/TEST_RESULTS.md) for detailed test results.
 - **[LIBRARY.md](LIBRARY.md)** - Complete library documentation with examples
 - **[USAGE.md](USAGE.md)** - HTTP API usage guide
 - **[QUICKSTART.md](QUICKSTART.md)** - Quick start guide (Russian)
-- **[MULTI_ACCOUNT.md](docs/MULTI_ACCOUNT.md)** - Multi-account system guide (NEW!)
+- **[MULTI_ACCOUNT.md](docs/MULTI_ACCOUNT.md)** - Multi-account system guide
 - **[ACCOUNT_SCHEMA.md](docs/ACCOUNT_SCHEMA.md)** - JSON storage schema
+
+## Quick Commands
+
+```bash
+# Add new account (recommended)
+node quick-add.js email@example.com password123 "Account Name"
+
+# List all accounts
+node accounts-cli.js list
+
+# View statistics
+node accounts-cli.js stats
+
+# Test multi-account system
+node tests/test_multi_account.js
+
+# Run example
+node examples/multi_account_example.js
+```
 
 ## Support
 

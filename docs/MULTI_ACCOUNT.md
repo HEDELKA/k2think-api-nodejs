@@ -6,13 +6,24 @@ Automatic account rotation for K2Think API to avoid rate limits and increase thr
 
 ### 1. Add Accounts
 
-Use the CLI to add your K2Think accounts:
+**Method 1: Quick Add (Recommended)**
+
+```bash
+node quick-add.js email@example.com password123 "Account Name"
+```
+
+Example:
+```bash
+node quick-add.js user@gmail.com MyPassword123 "My Account"
+```
+
+**Method 2: CLI Interactive**
 
 ```bash
 node accounts-cli.js add
 ```
 
-Or add programmatically:
+**Method 3: Programmatically**
 
 ```javascript
 const K2ThinkMultiClient = require('./client_multi');
@@ -22,14 +33,8 @@ await client.addAccount({
   email: 'user1@example.com',
   password: 'password123',
   name: 'Primary Account',
-  priority: 1
-});
-
-await client.addAccount({
-  email: 'user2@example.com',
-  password: 'password456',
-  name: 'Secondary Account',
-  priority: 2
+  priority: 1,
+  validate: false  // Skip validation (network issues)
 });
 ```
 
